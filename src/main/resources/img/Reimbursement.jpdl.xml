@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process key="admin" name="Reimbursement" xmlns="http://jbpm.org/4.4/jpdl">
+   <start g="392,12,48,48" name="start1">
+      <transition g="-66,-14" name="员工填写单子" to="填写补差申请单"/>
+   </start>
+   <task assignee="${user.name}" g="369,123,92,52" name="填写补差申请单">
+      <transition g="-63,-25" name="规范审批" to="审批"/>
+   </task>
+   <task assignee="A" g="225,396,92,52" name="A审批">
+      <transition g="-62,-25" name="审批通过" to="end1"/>
+   </task>
+   <task assignee="B" g="559,392,92,52" name="B审批">
+      <transition g="-34,-15" name="审批通过" to="end1"/>
+   </task>
+   <end g="401,622,48,48" name="end1"/>
+   <decision g="390,317,48,48" name="exclusive1">
+      <transition g="-138,-12" name="金额小于2000提交给A审批" to="A审批">
+     	 <condition expr="#{days &lt;  2000}"/>
+      </transition>
+      <transition g="-22,-13" name="金额大于2000提交给B审批" to="B审批">
+       	<condition expr="#{days&gt;2000 and days&lt;5000}"/>
+      </transition>
+      <transition g="-61,-23" name="金额超过5000审批不通过" to="end1">
+      	<condition expr="#{days  &gt; 5000}"/>
+      </transition>
+   </decision>
+   <task assignee="${user.name}" g="369,222,92,52" name="审批">
+      <transition g="-37,-15" name="审批通过" to="exclusive1"/>
+      <transition g="683,206:-130,-25" name="退回" to="填写补差申请单"/>
+   </task>
+</process>

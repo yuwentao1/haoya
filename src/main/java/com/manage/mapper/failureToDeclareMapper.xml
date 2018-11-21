@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.manage.mapper.failureToDeclareMapper">
+  
+  	<insert id="faiadd">
+		insert into failure_to_declare
+		(process_manid,process_name,process_time,area,equipment_id,equipment_name,problem_describe,problem_accessory,process_status)
+		values
+		(#{fai.process_manid},#{fai.process_name},sysdate,#{fai.area},#{fai.equipment_id},#{fai.equipment_name},#{fai.problem_describe},#{fai.problem_accessory},'1')
+  	</insert>
+  	
+  	
+ 	<update id="fialureUpdate" parameterType="failureToDeclare">
+ 		update failure_to_declare
+ 		<set>
+ 			<if test="manager_id != null and manager_id != ''">
+ 				manager_id = #{manager_id},
+ 			</if>
+ 			<if test="manager_name != null and manager_name != ''">
+ 				manager_name = #{manager_name},
+ 			</if>
+ 			<if test="repairman_id != null and repairman_id != ''">
+ 				repairman_id = #{repairman_id},
+ 			</if>
+ 			<if test="repairman_name != null and repairman_name != ''">
+ 				repairman_name = #{repairman_name},
+ 			</if>
+ 			<if test="repair_time != null and repair_time != ''">
+ 				repair_time = to_date(#{repair_time},'yyyy-MM-dd'),
+ 			</if>
+ 			<if test="repair_describe != null and repair_describe != ''">
+ 				repair_describe = #{repair_describe},
+ 			</if>
+ 			<if test="repair_accessory != null and repair_accessory != ''">
+ 				repair_accessory = #{repair_accessory},
+ 			</if>
+ 			<if test="repair_replace != null and repair_replace != ''">
+ 				manager_id = #{manager_id},
+ 			</if>
+ 			<if test="complete_time != null and complete_time != ''">
+ 				complete_time = to_date(#{complete_time},'yyyy-MM-dd'),
+ 			</if>
+ 			<if test="response_score != null and response_score != ''">
+ 				response_score = #{response_score},
+ 			</if>
+ 			<if test="quality_score != null and quality_score != ''">
+ 				quality_score = #{quality_score},
+ 			</if>
+ 			<if test="attitude_score != null and attitude_score != ''">
+ 				attitude_score = #{attitude_score},
+ 			</if>
+ 			<if test="score_describe != null and score_describe != ''">
+ 				score_describe = #{score_describe},
+ 			</if>
+ 			<if test="score_accessory != null and score_accessory != ''">
+ 				score_accessory = #{score_accessory},
+ 			</if>
+ 			<if test="score_time != null and score_time != ''">
+ 				score_time = to_date(#{score_time},'yyyy-MM-dd'),
+ 			</if>
+ 			<if test="over_time != null and over_time != ''">
+ 				over_time = to_date(#{over_time},'yyyy-MM-dd'),
+ 			</if>
+ 			<if test="manager_id != null and manager_id != ''">
+ 				process_status = #{process_status},
+ 			</if>
+ 		</set>
+ 		where equipment_id = #{equipment_id}
+ 	</update>
+ 	
+ 	
+ 	<select id="fialureJquery" resultType="failureToDeclare">
+ 		select * from failure_to_declare
+ 		<where>
+ 			<if test="equipment_id != null and equipment_id != ''">
+ 				equipment_id = #{equipment_id}
+ 			</if>
+ 		</where>
+ 	</select>
+  </mapper>

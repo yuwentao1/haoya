@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manage.mapper.AccessoryMapper">
+	  <insert id="addAccessory" >
+        insert into ASSET_ACCESSORY(t_id,ACCESSORY_CATEGORY,ACCESSORY_TYPE,ACCESSORY_PATH,ACCESSORY_MEMO)
+        values
+        (#{t_id},#{accessory_category},#{accessory_type},#{accessory_path},#{accessory_memo})
+     </insert>
+	   
+	 <select id="selectaccessorytid" resultType="Accessory" >
+	      select * from ASSET_ACCESSORY where t_id=#{t_id}
+	 </select> 
+	 
+	 <select id="selectid" resultType="Accessory" >
+	      select * from ASSET_ACCESSORY where id=#{t_id}
+	 </select> 
+	
+	  
+</mapper>

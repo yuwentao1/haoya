@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manage.mapper.AssetMapper">
+
+	
+	<resultMap type="Asset" id="Mapper">
+        <id property="equipment_id" column="EQUIPMENT_ID"/>
+        <result property="f_equipment_id" column="F_EQUIPMENT_ID"/>
+        <result property="equipment_type_id" column="EQUIPMENT_TYPE_ID"/>
+        <result property="equipment_name" column="EQUIPMENT_NAME"/>
+        <result property="equipment_shortname" column="EQUIPMENT_SHORTNAME"/>
+        <result property="contract_id" column="CONTRACT_ID"/>
+        <result property="fixed_assets" column="fixed assets"/>
+        <result property="oneself_id" column="ONESELF_ID"/>
+        <result property="factory" column="FACTORY"/>
+    	<result property="product_id" column="PRODUCT_ID"/>
+        <result property="model" column="MODEL"/>
+        <result property="parameters" column="PARAMETERS"/>
+        <result property="power" column="POWER"/>
+    	<result property="num" column="NUM"/>
+        <result property="equipment_price" column="EQUIPMENT_PRICE"/>
+        <result property="leave_factory_date" column="LEAVE_FACTORY_DATE"/>
+        <result property="equipment_explain" column="EQUIPMENT_EXPLAIN"/>
+        <result property="area" column="AREA"/>
+        <result property="install_location" column="INSTALL_LOCATION"/>
+        <result property="run_date" column="RUN_DATE"/>
+    	<result property="manager" column="MANAGER"/>
+        <result property="end_date" column="END_DATE"/>
+        <result property="cycle" column="CYCLE"/>
+        <result property="last_date" column="LAST_DATE"/>
+        <result property="next_date" column="NEXT_DATE"/>
+        <result property="status" column="STATUS"/>
+    </resultMap>
+	
+
+	<select id="selectlist" resultMap="Mapper">
+		select asset_equipment_base.* from (select asset_equipment_base.*,rownum rn from asset_equipment_base
+			<if test="equipment_name != null and equipment_name != ''"> 
+			where
+				 equipment_name like #{equipment_name} 
+				</if>
+		) asset_equipment_base where  rn &gt; #{page} and rownum &lt;=#{limit}
+	
+	</select>
+	
+	
+	<select id="select"  resultMap="Mapper">
+		select * from asset_equipment_base
+		 where equipment_id=#{id}	
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(1) from asset_equipment_base 
+		<if test="equipment_name != null and equipment_name != ''"> 
+			where equipment_name like #{equipment_name} 
+		</if>
+	</select>
+
+	
+</mapper>
+
+
+

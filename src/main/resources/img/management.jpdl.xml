@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process key="management" name="management" xmlns="http://jbpm.org/4.4/jpdl">
+   <start g="495,22,48,48" name="开始">
+      <transition g="-55,-25" name="to 申报" to="申报"/>
+   </start>
+   <task g="484,104,92,52" name="申报" assignee="申报">
+      <transition g="-55,-25" name="to 派工" to="派工"/>
+   </task>
+   <task g="484,193,92,52" name="派工" assignee="派工">
+      <transition g="-55,-25" name="to 维修" to="维修"/>
+   </task>
+   <task g="482,280,92,52" name="维修" assignee="维修">
+      <transition g="-55,-25" name="to 评价" to="评价"/>
+   </task>
+   <task g="479,362,92,52" name="评价" assignee="评价">
+      <transition g="-55,-25" name="to 归档" to="归档"/>
+   </task>
+   <end g="497,446,48,48" name="归档"/>
+</process>
