@@ -11,5 +11,6 @@
 		选择文件:<input type="file" name="file">
 		 <input type="submit" value="上传">
 	</form>
+	asd
 </body>
 </html>
